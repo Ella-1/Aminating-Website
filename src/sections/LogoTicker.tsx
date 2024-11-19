@@ -5,6 +5,7 @@ import echoLogo from '@/assets/logo-echo.png'
 import apexLogo from '@/assets/logo-apex.png'
 import paulseLogo from '@/assets/logo-pulse.png'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export const LogoTicker = () => {
   return (
