@@ -1,3 +1,4 @@
+"use client"
 import archemyLogo from '@/assets/logo-acme.png'
 import QuantumLogo from '@/assets/logo-quantum.png'
 import CellistiaLogo from '@/assets/logo-celestial.png'
@@ -12,14 +13,14 @@ export const LogoTicker = () => {
     <div className='py-8 md:py-12 bg-white'>
       <div className='container'>
          <div className='flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black,transparent)]'>
-         <div className='flex gap-14 flex-none'>
-            <Image  src={archemyLogo} alt='alchemey Logo' className='logo-ticker-image'/>
+         <motion.div className='flex gap-14 flex-none pr-14' animate={{ translateX:"-100%"}} transition={{duration:5, repeat: Infinity, ease:'linear', repeatType:"loop"}}>
+            <Image  src={archemyLogo} alt='alchemey Logo' className='logo-ticker-image' />
             <Image  src={QuantumLogo} alt='quantum Logo'/>
             <Image  src={CellistiaLogo} alt='cellistia Logo'/>
             <Image  src={echoLogo} alt='echo Logo'/>
             <Image  src={apexLogo} alt='apex Logo'/>
             <Image  src={paulseLogo} alt='paulse Logo'/>
-          </div>
+          </motion.div>
          </div>
       </div>
     </div>
