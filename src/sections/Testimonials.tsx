@@ -1,3 +1,4 @@
+"use client"
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
@@ -11,6 +12,7 @@ import Image from "next/image";
 import {motion} from 'framer-motion'
 
 import { twMerge } from "tailwind-merge";
+import React from "react";
 
 const testimonials = [
   {
@@ -73,9 +75,18 @@ const firstColumn = testimonials.slice(0,3)
 const secoundtColumn = testimonials.slice(3,6)
 const thirdColumn = testimonials.slice(6,9)
 
-const TestimonialColumn = (props: {className?: string; testimonials:typeof testimonials}) => (
-  <div className={twMerge("flex flex-col gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]", props.className)}>
-        {props.testimonials.map(({text,imageSrc,name,username}) => (
+
+
+const TestimonialColumn = (props: {className?: string; testimonials:typeof testimonials; duration?: number;}) => (
+ <div className={twMerge("overflow-hidden", props.className)}>
+   <motion.div animate={{
+    translateY:"-50%"
+   }} transition={{duration:props.duration || 10, repeat:Infinity,ease:'linear', repeatType:'loop'}} className={twMerge("flex flex-col gap-6 pb-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] ")}>
+        ]
+        {[...new Array(2)].fill(0).map((_,index)=> (
+       
+          <React.Fragment key={index}>
+            {props.testimonials.map(({text,imageSrc,name,username}) => (
           <div key={name} className="card" >
               <div>{text}</div>
               <div className="flex items-center gap-2 mt-5">
@@ -87,24 +98,29 @@ const TestimonialColumn = (props: {className?: string; testimonials:typeof testi
               </div>
           </div>
         ))}
-      </div>
+        </React.Fragment>
+        
+      ))}
+          
+      </motion.div>
+ </div>
 )
 
 export const Testimonials = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white py-10">
       <div>
         <div className="flex justify-center">
         <h2 className="tag">Testimonials</h2>
         </div>
         <h2 className="section-title mt-5">What our users say</h2>
-        <p className="section-description mt-5" >From intuitive design to powerful features our app has become an essential tool for users around the world</p>
-      <div className="flex justify-center gap-6">
-        <TestimonialColumn testimonials={firstColumn} />
+        <p className="section-description mt-5 py-20" >From intuitive design to powerful features our app has become an essential tool for users around the world</p>
+      <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[738px] overflow-hidden">
+        <TestimonialColumn testimonials={firstColumn} duration={15}/>
 
-        <TestimonialColumn testimonials={secoundtColumn} className="hidden md:flex"/>
+        <TestimonialColumn testimonials={secoundtColumn} className="hidden md:block" duration={19}/>
 
-        <TestimonialColumn testimonials={thirdColumn} className="hidden lg:flex"/>
+        <TestimonialColumn testimonials={thirdColumn} className="hidden lg:block" duration={17}/>
 
       </div>
       </div>
